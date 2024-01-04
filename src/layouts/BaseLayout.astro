@@ -1,6 +1,7 @@
 ---
 // make sure we're working with a base that makes sense
 import "modern-normalize";
+import Navigation from "../components/Navigation.astro";
 
 interface Props {
   pageTitle: string;
@@ -25,10 +26,14 @@ const { pageTitle } = Astro.props;
 
       body {
         background-color: var(--background-color);
+        max-width: 30rem;
+        margin-right: auto;
+        margin-left: auto;
       }
     </style>
   </head>
   <body>
+    <Navigation />
     <slot />
   </body>
 </html>
