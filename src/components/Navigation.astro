@@ -12,7 +12,7 @@
 
   .link a {
     text-decoration: none;
-    color: black;
+    color: inherit;
     display: block;
     position: relative;
   }
@@ -23,7 +23,7 @@
     bottom: -6px;
     left: 0;
     width: 100%;
-    border-bottom: 4px solid #2e2e2e;
+    border-bottom: 2px solid var(--color);
     transform: scaleX(0);
     transition: transform 100ms ease-in-out;
   }
@@ -31,13 +31,17 @@
   .link a:hover::after {
     transform: scaleX(1);
   }
+
+  .link a:focus-visible {
+    outline: 2px solid var(--color);
+    outline-offset: 2px;
+  }
 </style>
 
 <nav>
   <ul class="links">
     <li class="link"><a href="/">Home</a></li>
     <li class="link"><a href="/writing">Writing</a></li>
-    <li class="link"><a href="/about">About</a></li>
     <li class="link"><a href="/contact">Contact</a></li>
   </ul>
 </nav>

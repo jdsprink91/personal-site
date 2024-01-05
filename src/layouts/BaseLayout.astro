@@ -18,14 +18,14 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <style>
-      /* setting up css variables for light / dark theme eventually */
       :root {
-        /* --background-color: #f6d992; */
         --background-color: #ffe5b4;
+        --color: #2e2e2e;
       }
 
       body {
         background-color: var(--background-color);
+        color: var(--color);
         max-width: 30rem;
         margin-right: auto;
         margin-left: auto;
@@ -34,6 +34,8 @@ const { pageTitle } = Astro.props;
   </head>
   <body>
     <Navigation />
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
