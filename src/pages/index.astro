@@ -1,9 +1,42 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import good from "../images/good.jpeg";
 ---
 
+<style>
+  img {
+    --img-size: 200px;
+    height: var(--img-size);
+    width: var(--img-size);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  @media screen and (min-width: 480px) {
+    img {
+      --img-size: 350px;
+    }
+  }
+</style>
+
 <BaseLayout pageTitle="Home">
-  <h1>Home</h1>
-  <!-- <img /> -->
-  <p>Howdy! I'm Jason Sprinkle and I am a software developer and writer based out of Austin, Texas.</p>
+  <h1>Hi! I'm Jason Sprinkle</h1>
+  <img src={good.src} alt={"A handsom man standing next to a sunflower"} />
+  <p>I'm a software developer and writer based out of Austin, Texas.</p>
+  <p>I read for <a href="https://abandonjournal.com/">Abandon Journal</a>.</p>
+  <p>
+    I also push some code up to <a href="https://github.com/jdsprink91"
+      >github</a
+    > from time to time.
+  </p>
+  <p>
+    If you ever want to reach out to me, visit my <a href="/contact"
+      >contact page</a
+    >.
+  </p>
 </BaseLayout>
