@@ -1,7 +1,84 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Publication {
+  title: string;
+  date: string;
+  magazineTitle: string;
+
+  linkMissingExplanation?: string;
+  link?: string;
+}
+
+const publications: Publication[] = [
+  {
+    title: "What Daughters Do",
+    date: "Some Vauge time in 2022",
+    magazineTitle: "Five South",
+    linkMissingExplanation:
+      "They are moving to a new website. It'll be up soon. If you want to read it, message me.",
+  },
+  {
+    title: "Dance Music",
+    date: "August, 2021",
+    magazineTitle: "Rejection Letters",
+    link: "https://rejection-letters.com/2021/08/17/dance-music-jason-sprinkle/",
+  },
+  {
+    title: "Unlimited Options",
+    date: "June, 2021",
+    magazineTitle: "SmokeLong Quarterly",
+    link: "https://www.smokelong.com/unlimited-options/",
+  },
+  {
+    title: "Freedom to Move",
+    date: "April, 2021",
+    magazineTitle: "Free Flash Fiction",
+    link: "https://freeflashfiction.com/fiction/freedom-to-move/",
+  },
+  {
+    title: "It’s the Weekend and I Want to Be Overwhelmed Into Captivity",
+    date: "October, 2020",
+    magazineTitle: "Trash Magazine",
+    linkMissingExplanation:
+      "Seems defunct. Long live trash. If you want to read it, message me.",
+  },
+  {
+    title: "Bella Eats an Extraterrestrial Pancake",
+    date: "Fall 2020",
+    magazineTitle: "Moonpark Review",
+    link: "https://moonparkreview.com/issue-thirteen-fall-2020/extraterrestrial-pancake/",
+  },
+  {
+    title: "Contagion",
+    date: "June 2018",
+    magazineTitle: "Five on the Fifth",
+    link: "http://www.fiveonthefifth.com/vol-3-issue-8-story-5",
+  },
+];
 ---
 
 <BaseLayout pageTitle="Writing">
-  <p>I mostly write flash fiction. You can check out some of my writing 
+  <h1>Publications</h1>
+  <p>
+    I mostly write flash fiction. Here is a list of my current publications.
+  </p>
+  <ul>
+    {
+      publications.map((p) => {
+        let title = p.title;
+        if (p.link) {
+          title = <a href={p.link}>{p.title}</a>;
+        }
+        return (
+          <li>
+            <p>
+              {title} — <em>{p.magazineTitle}</em>, {p.date}
+            </p>
+            {p.linkMissingExplanation && <em>{p.linkMissingExplanation}</em>}
+          </li>
+        );
+      })
+    }
+  </ul>
 </BaseLayout>
