@@ -13,7 +13,7 @@ interface Publication {
 const publications: Publication[] = [
   {
     title: "What Daughters Do",
-    date: "Some Vauge time in 2022",
+    date: "Some vauge time in 2022",
     magazineTitle: "Five South",
     linkMissingExplanation:
       "They are moving to a new website. It'll be up soon. If you want to read it, message me.",
@@ -58,6 +58,16 @@ const publications: Publication[] = [
 ];
 ---
 
+<style>
+  ul {
+    padding-left: 0;
+    list-style: inside;
+  }
+
+  li:not(:first-child) {
+    margin-top: 0.75rem;
+  }
+</style>
 <BaseLayout pageTitle="Writing">
   <h1>Publications</h1>
   <p>
@@ -72,10 +82,12 @@ const publications: Publication[] = [
         }
         return (
           <li>
-            <p>
-              {title} — <em>{p.magazineTitle}</em>, {p.date}
-            </p>
-            {p.linkMissingExplanation && <em>{p.linkMissingExplanation}</em>}
+            {title} — <em>{p.magazineTitle}</em>, {p.date}
+            {p.linkMissingExplanation && (
+              <p>
+                <em>{p.linkMissingExplanation}</em>
+              </p>
+            )}
           </li>
         );
       })
