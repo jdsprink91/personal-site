@@ -5,7 +5,7 @@
 - [ ] This will include looking for fonts, background colors, etc
 - [ ] Make sure these pages look nice on mobile
 - [ ] Do some basic SEO
-- [ ] Get domain name
-- [ ] Get netlify account
-- [ ] Deploy to web
+- [x] Get domain name
+- [x] Get netlify account
+- [x] Deploy to web
 
