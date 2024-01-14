@@ -59,6 +59,12 @@ const publications: Publication[] = [
 ---
 
 <style>
+  section {
+    max-width: var(--inner-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
   ul {
     padding-left: 0;
     list-style: inside;
@@ -70,27 +76,29 @@ const publications: Publication[] = [
 </style>
 <BaseLayout pageTitle="Writing">
   <h1>Publications</h1>
-  <p>
-    I mostly write flash fiction. Here is a list of my current publications.
-  </p>
-  <ul>
-    {
-      publications.map((p) => {
-        let title = p.title;
-        if (p.link) {
-          title = <a href={p.link}>{p.title}</a>;
-        }
-        return (
-          <li>
-            {title} — <em>{p.magazineTitle}</em>, {p.date}
-            {p.linkMissingExplanation && (
-              <p>
-                <em>{p.linkMissingExplanation}</em>
-              </p>
-            )}
-          </li>
-        );
-      })
-    }
-  </ul>
+  <section>
+    <p>
+      I mostly write flash fiction. Here is a list of my current publications.
+    </p>
+    <ul>
+      {
+        publications.map((p) => {
+          let title = p.title;
+          if (p.link) {
+            title = <a href={p.link}>{p.title}</a>;
+          }
+          return (
+            <li>
+              {title} — <em>{p.magazineTitle}</em>, {p.date}
+              {p.linkMissingExplanation && (
+                <p>
+                  <em>{p.linkMissingExplanation}</em>
+                </p>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
 </BaseLayout>

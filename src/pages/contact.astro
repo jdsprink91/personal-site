@@ -2,20 +2,59 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
+<style>
+  form {
+    max-width: var(--inner-max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  form > * + * {
+    margin-top: 1rem;
+  }
+
+  label {
+    display: block;
+  }
+
+  label + * {
+    margin-top: 0.5rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  textarea {
+    height: 5rem;
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 30rem) {
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
 <BaseLayout pageTitle="Contact">
   <h1>Contact</h1>
   <form name="contact" method="post" data-netlify="true" action="/success">
-    <p>
-      <label>Your Name: <input type="text" name="name" /></label>
-    </p>
-    <p>
-      <label>Your Email: <input type="email" name="email" /></label>
-    </p>
-    <p>
-      <label>Message: <textarea name="message"></textarea></label>
-    </p>
-    <p>
-      <button type="submit">Send</button>
-    </p>
+    <div>
+      <label for="name">Your Name:</label>
+      <input id="name" type="text" name="name" placeholder="Name" />
+    </div>
+    <div>
+      <label for="email">Your Email:</label>
+      <input id="email" type="email" name="email" placeholder="Email" />
+    </div>
+    <div>
+      <label for="message">Your Message:</label>
+      <textarea name="message" id="message" placeholder="Write me a message"
+      ></textarea>
+    </div>
+    <button type="submit">Submit</button>
   </form>
 </BaseLayout>
