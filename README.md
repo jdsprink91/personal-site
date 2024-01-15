@@ -2,7 +2,7 @@
 
 - [x] Set up eslint and prettier
 - [x] Get three pages: Home, Writing, Contact
-- [ ] This will include looking for fonts, background colors, etc
+- [x] This will include looking for fonts, background colors, etc
 - [x] Make sure these pages look nice on mobile
 - [ ] Do some basic SEO
 - [x] Get domain name
