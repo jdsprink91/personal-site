@@ -1,6 +1,7 @@
 ---
 // make sure we're working with a base that makes sense
 import "modern-normalize/modern-normalize.css";
+import "../style/index.css";
 import Navigation from "../components/Navigation.astro";
 
 interface Props {
@@ -18,93 +19,6 @@ const { pageTitle, headingCopy } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Jason Sprinkle | {pageTitle}</title>
-    <style is:global>
-      :root {
-        /* dig this color palette */
-        /* go here for inspo if you need it */
-        /* https://www.color-hex.com/color-palette/111268 */
-        --background-color: #ffecc8;
-        --color: #2e2e2e;
-        --link-color: #315f72;
-      }
-
-      body {
-        background-color: var(--background-color);
-        color: var(--color);
-        max-width: 40rem;
-        margin-right: auto;
-        margin-left: auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      main {
-        max-width: 35rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      a {
-        color: var(--link-color);
-      }
-
-      a:focus-visible {
-        outline: 2px solid var(--link-color);
-        outline-offset: 2px;
-      }
-
-      input:focus,
-      textarea:focus {
-        outline: 2px solid var(--link-color);
-        outline-offset: 2px;
-      }
-
-      input,
-      textarea {
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-        border: 1px solid var(--link-color);
-        border-radius: 8px;
-        padding: 0.5rem 0.75rem;
-      }
-
-      button {
-        display: inline-flex;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        line-height: 1.5;
-        border-radius: 0.5rem;
-        border: 1px solid var(--link-color);
-        background-color: var(--link-color);
-        cursor: pointer;
-        color: white;
-
-        /* clear some things out */
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-      }
-
-      button:focus {
-        outline: 2px solid var(--link-color);
-        outline-offset: 2px;
-      }
-
-      header {
-        position: sticky;
-        top: 0px;
-        background-color: var(--background-color);
-      }
-
-      main > div {
-        max-width: 30rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    </style>
   </head>
   <body>
     <header>
