@@ -1,3 +1,20 @@
+/**
+ * add font families
+ */
+
+@font-face {
+  font-family: "WorkSans";
+  src: url("/fonts/WorkSans-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "WorkSansItalic";
+  src: url("/fonts/WorkSans-Italic-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+  font-style: italic;
+}
+
 :root {
   /* dig this color palette */
   /* go here for inspo if you need it */
@@ -15,6 +32,7 @@ body {
   margin-left: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  font-family: "WorkSans";
 }
 
 main {
