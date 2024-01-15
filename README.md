@@ -8,4 +8,5 @@
 - [x] Get domain name
 - [x] Get netlify account
 - [x] Deploy to web
+- [ ] Do basic form validation (with styling)
 
