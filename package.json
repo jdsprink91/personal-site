@@ -34,6 +34,9 @@
     "**/*.{astro,js}": [
       "yarn run lint",
       "yarn run prettier:write"
+    ],
+    "**/*.{css}": [
+      "yarn run prettier:write"
     ]
   }
 }
