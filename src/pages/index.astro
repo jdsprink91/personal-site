@@ -5,11 +5,6 @@ import good from "../images/good.jpeg";
 ---
 
 <style>
-  section {
-    max-width: var(--inner-max-width);
-    margin-left: auto;
-    margin-right: auto;
-  }
   img {
     --img-size: 200px;
     height: var(--img-size);
@@ -29,20 +24,17 @@ import good from "../images/good.jpeg";
   }
 </style>
 
-<BaseLayout pageTitle="Home">
-  <h1>Hi! I'm Jason Sprinkle</h1>
-  <section>
-    <img src={good.src} alt={"A handsom man standing next to a sunflower"} />
-    <p>I'm a software developer and writer based out of Austin, Texas.</p>
-    <p>I read for <a href="https://abandonjournal.com/">Abandon Journal</a>.</p>
-    <p>
-      I push some code up to <a href="https://github.com/jdsprink91">github</a> from
-      time to time.
-    </p>
-    <p>
-      If you ever want to reach out to me, visit my <a href="/contact"
-        >contact page</a
-      >.
-    </p>
-  </section>
+<BaseLayout pageTitle="Home" headingCopy="Hi! I'm Jason Sprinkle">
+  <img src={good.src} alt={"A handsom man standing next to a sunflower"} />
+  <p>I'm a software developer and writer based out of Austin, Texas.</p>
+  <p>I read for <a href="https://abandonjournal.com/">Abandon Journal</a>.</p>
+  <p>
+    I push some code up to <a href="https://github.com/jdsprink91">github</a> from
+    time to time.
+  </p>
+  <p>
+    If you ever want to reach out to me, visit my <a href="/contact"
+      >contact page</a
+    >.
+  </p>
 </BaseLayout>

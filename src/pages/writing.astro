@@ -74,31 +74,28 @@ const publications: Publication[] = [
     margin-top: 0.75rem;
   }
 </style>
-<BaseLayout pageTitle="Writing">
-  <h1>Publications</h1>
-  <section>
-    <p>
-      I mostly write flash fiction. Here is a list of my current publications.
-    </p>
-    <ul>
-      {
-        publications.map((p) => {
-          let title = p.title;
-          if (p.link) {
-            title = <a href={p.link}>{p.title}</a>;
-          }
-          return (
-            <li>
-              {title} — <em>{p.magazineTitle}</em>, {p.date}
-              {p.linkMissingExplanation && (
-                <p>
-                  <em>{p.linkMissingExplanation}</em>
-                </p>
-              )}
-            </li>
-          );
-        })
-      }
-    </ul>
-  </section>
+<BaseLayout pageTitle="Writing" headingCopy="Publications">
+  <p>
+    I mostly write flash fiction. Here is a list of my current publications.
+  </p>
+  <ul>
+    {
+      publications.map((p) => {
+        let title = p.title;
+        if (p.link) {
+          title = <a href={p.link}>{p.title}</a>;
+        }
+        return (
+          <li>
+            {title} — <em>{p.magazineTitle}</em>, {p.date}
+            {p.linkMissingExplanation && (
+              <p>
+                <em>{p.linkMissingExplanation}</em>
+              </p>
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
 </BaseLayout>

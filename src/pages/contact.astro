@@ -3,12 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <style>
-  form {
-    max-width: var(--inner-max-width);
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   form > * + * {
     margin-top: 1rem;
   }
@@ -39,8 +33,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 </style>
 
-<BaseLayout pageTitle="Contact">
-  <h1>Contact</h1>
+<BaseLayout pageTitle="Contact" headingCopy="Contact">
   <form name="contact" method="post" data-netlify="true" action="/success">
     <div>
       <label for="name">Your Name:</label>

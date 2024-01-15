@@ -5,9 +5,10 @@ import Navigation from "../components/Navigation.astro";
 
 interface Props {
   pageTitle: string;
+  headingCopy: string;
 }
 
-const { pageTitle } = Astro.props;
+const { pageTitle, headingCopy } = Astro.props;
 ---
 
 <html lang="en">
@@ -25,7 +26,6 @@ const { pageTitle } = Astro.props;
         --background-color: #ffecc8;
         --color: #2e2e2e;
         --link-color: #315f72;
-        --inner-max-width: 30rem;
       }
 
       body {
@@ -99,13 +99,24 @@ const { pageTitle } = Astro.props;
         background-color: var(--background-color);
       }
     </style>
+
+    <style>
+      .slot-wrapper {
+        max-width: var(--inner-max-width);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
   </head>
   <body>
     <header>
       <Navigation />
     </header>
     <main>
-      <slot />
+      <h1>{headingCopy}</h1>
+      <div class="slot-wrapper">
+        <slot />
+      </div>
     </main>
   </body>
 </html>
