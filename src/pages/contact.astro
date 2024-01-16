@@ -34,20 +34,71 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <BaseLayout pageTitle="Contact" headingCopy="Contact">
-  <form name="contact" method="post" data-netlify="true" action="/success">
+  <form
+    name="contact"
+    method="post"
+    data-netlify="true"
+    action="/success"
+    novalidate="true"
+  >
     <div>
       <label for="name">Your Name:</label>
-      <input id="name" type="text" name="name" placeholder="Name" />
+      <input id="name" type="text" name="name" placeholder="Name" required />
     </div>
     <div>
       <label for="email">Your Email:</label>
-      <input id="email" type="email" name="email" placeholder="Email" />
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
     </div>
     <div>
       <label for="message">Your Message:</label>
-      <textarea name="message" id="message" placeholder="Write me a message"
-      ></textarea>
+      <textarea
+        name="message"
+        id="message"
+        placeholder="Write me a message"
+        required></textarea>
     </div>
     <button type="submit">Submit</button>
   </form>
 </BaseLayout>
+
+<script>
+  // ok so what do I need to do here?
+  // 1. put validation on the input elements DONE
+  // 2. put novalidation on the form
+  // 3. set up event listeners to make sure that validation is shown on change
+  // 4. set up event listeners to make sure that validation is checked on input (only to change to valid)
+  // 5. set up form submission handler (should check for invalid inputs)
+  const inputElms = document.querySelectorAll("input,textarea");
+
+  // if our form is invalid, then do not submit
+  document
+    .querySelector<HTMLFormElement>("form")
+    ?.addEventListener("submit", (event) => {
+      if (
+        !event.currentTarget ||
+        !(event.currentTarget instanceof HTMLFormElement) ||
+        !event.currentTarget.checkValidity()
+      ) {
+        console.log("it ain't valid");
+        event.preventDefault();
+        return;
+      }
+    });
+
+  inputElms?.forEach((node) => {
+    node.addEventListener("change", (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        const { valid, valueMissing } = event.target.validity;
+        if (!valid && valueMissing) {
+          // get the parent node and insert a message after
+        }
+      }
+    });
+  });
+</script>
