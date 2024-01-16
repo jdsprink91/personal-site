@@ -16,6 +16,19 @@ const { pageTitle, headingCopy } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/sunflower.svg" />
+    <!-- preload the two fonts we will be using -->
+    <link
+      rel="preload"
+      href="/fonts/WorkSans-Italic-VariableFont_wght.ttf"
+      as="font"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/WorkSans-VariableFont_wght.ttf"
+      as="font"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Jason Sprinkle | {pageTitle}</title>
