@@ -93,7 +93,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         !event.currentTarget.checkValidity()
       ) {
         // show the errors if need be, then prevent the form from submitting
-        inputElms?.forEach((node) => {
+        inputElms.forEach((node) => {
           showErrorIfNeedBe(node);
         });
         event.preventDefault();
@@ -101,7 +101,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       }
     });
 
-  inputElms?.forEach((node) => {
+  inputElms.forEach((node) => {
     node.addEventListener("blur", (event) => {
       if (
         event.target instanceof HTMLInputElement ||
