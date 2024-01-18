@@ -68,15 +68,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-  // ok so what do I need to do here?
-  // 1. put validation on the input elements DONE
-  // 2. put novalidation on the form
-  // 3. set up event listeners to make sure that validation is shown on change
-  // 4. set up event listeners to make sure that validation is checked on input (only to change to valid)
-  // 5. set up form submission handler (should check for invalid inputs)
-  const inputElms = document.querySelectorAll("input,textarea");
+  const inputElms = document.querySelectorAll<
+    HTMLInputElement | HTMLTextAreaElement
+  >("input,textarea");
 
-  // if our form is invalid, then do not submit
+  const showErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
+    if (!elm.validity.valid) {
+      elm.classList.add("invalid");
+    }
+  };
+
+  const removeErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
+    if (elm.validity.valid) {
+      elm.classList.remove("invalid");
+    }
+  };
+
   document
     .querySelector<HTMLFormElement>("form")
     ?.addEventListener("submit", (event) => {
@@ -85,19 +92,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         !(event.currentTarget instanceof HTMLFormElement) ||
         !event.currentTarget.checkValidity()
       ) {
-        console.log("it ain't valid");
+        // show the errors if need be, then prevent the form from submitting
+        inputElms?.forEach((node) => {
+          showErrorIfNeedBe(node);
+        });
         event.preventDefault();
         return;
       }
     });
 
   inputElms?.forEach((node) => {
-    node.addEventListener("change", (event) => {
-      if (event.target instanceof HTMLInputElement) {
-        const { valid, valueMissing } = event.target.validity;
-        if (!valid && valueMissing) {
-          // get the parent node and insert a message after
-        }
+    node.addEventListener("blur", (event) => {
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement
+      ) {
+        showErrorIfNeedBe(event.target);
+      }
+    });
+
+    node.addEventListener("input", (event) => {
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement
+      ) {
+        removeErrorIfNeedBe(event.target);
       }
     });
   });

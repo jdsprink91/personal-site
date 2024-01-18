@@ -70,6 +70,10 @@ textarea:focus {
   outline: 2px solid red;
 }
 
+.invalid:focus {
+  outline: 2px solid red;
+}
+
 button {
   display: inline-flex;
   padding-left: 1rem;
