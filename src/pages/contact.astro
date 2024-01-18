@@ -43,7 +43,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   >
     <div>
       <label for="name">Your Name:</label>
-      <input id="name" type="text" name="name" placeholder="Name" required />
+      <input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+        data-value-missing-msg="Tell me your name!"
+      />
     </div>
     <div>
       <label for="email">Your Email:</label>
@@ -53,6 +60,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         name="email"
         placeholder="Email"
         required
+        data-value-missing-msg="HEY! What's your email??"
       />
     </div>
     <div>
@@ -61,7 +69,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         name="message"
         id="message"
         placeholder="Write me a message"
-        required></textarea>
+        required
+        data-value-missing-msg="You're not gonna write me nothin?"></textarea>
     </div>
     <button type="submit">Submit</button>
   </form>
@@ -75,6 +84,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   const showErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
     if (!elm.validity.valid) {
       elm.classList.add("invalid");
+
+      if (elm.validity.valueMissing) {
+        const p = document.createElement("p");
+        p.innerText = elm.dataset.valueMissingMsg!;
+        // need to check to make sure that the error message isn't already there
+        elm.after(p);
+      }
     }
   };
 
