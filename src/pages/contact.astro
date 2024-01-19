@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// note the empty p tags below the inputs and textarea
+// I'm doing this so that the scoped styles can pick up
+// what needs to be styled. I'm just going to use
+// javascript to toggle the display
 ---
 
 <style>
@@ -23,6 +28,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   textarea {
     height: 5rem;
     max-width: 100%;
+  }
+
+  input + p,
+  textarea + p {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: red;
+    display: none;
   }
 
   @media screen and (max-width: 30rem) {
@@ -51,6 +64,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         required
         data-value-missing-msg="Tell me your name!"
       />
+      <p></p>
     </div>
     <div>
       <label for="email">Your Email:</label>
@@ -61,7 +75,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         placeholder="Email"
         required
         data-value-missing-msg="HEY! What's your email??"
+        data-type-missing-msg="That doesn't look like an email to me."
       />
+      <p></p>
     </div>
     <div>
       <label for="message">Your Message:</label>
@@ -70,7 +86,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         id="message"
         placeholder="Write me a message"
         required
-        data-value-missing-msg="You're not gonna write me nothin?"></textarea>
+        data-value-missing-msg="You're not gonna write me anything?"></textarea>
+      <p></p>
     </div>
     <button type="submit">Submit</button>
   </form>
@@ -85,10 +102,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     if (!elm.validity.valid && !elm.classList.contains("invalid")) {
       elm.classList.add("invalid");
 
+      const p = elm.nextSibling as HTMLParagraphElement;
+      p.style.display = "block";
+
       if (elm.validity.valueMissing) {
+        p.innerText = elm.dataset.valueMissingMsg ?? "";
+      }
+
+      if (elm.validity.typeMismatch) {
         const p = document.createElement("p");
-        p.innerText = elm.dataset.valueMissingMsg!;
-        elm.after(p);
+        p.innerText = elm.dataset.typeMissingMsg ?? "";
       }
     }
   };
@@ -97,7 +120,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     if (elm.validity.valid && elm.classList.contains("invalid")) {
       elm.classList.remove("invalid");
       if (elm.nextSibling) {
-        elm.parentNode?.removeChild(elm.nextSibling);
+        const p = elm.nextSibling as HTMLParagraphElement;
+        p.style.display = "none";
+        p.innerText = "";
       }
     }
   };
