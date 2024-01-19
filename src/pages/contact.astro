@@ -127,6 +127,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   };
 
+  // oo this is going to be interesting
+  // I like this less noisy form, but now the strategy
+  // is going to have to change
+  // 1. will need to store that the form is dirty, meaning
+  // we tried to submit it once and it needs validation
+  // 2. If it is dirty, then I want to do two things:
+  // ... I think. Will need to think about this more
   document
     .querySelector<HTMLFormElement>("form")
     ?.addEventListener("submit", (event) => {
@@ -145,15 +152,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     });
 
   inputElms.forEach((node) => {
-    node.addEventListener("blur", (event) => {
-      if (
-        event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLTextAreaElement
-      ) {
-        showErrorIfNeedBe(event.target);
-      }
-    });
-
     node.addEventListener("input", (event) => {
       if (
         event.target instanceof HTMLInputElement ||
