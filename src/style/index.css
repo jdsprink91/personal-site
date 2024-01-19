@@ -1,6 +1,9 @@
 /**
  * add font families
  */
+p {
+  margin: 0px;
+}
 
 @font-face {
   font-family: "WorkSans";

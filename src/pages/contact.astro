@@ -82,21 +82,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   >("input,textarea");
 
   const showErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
-    if (!elm.validity.valid) {
+    if (!elm.validity.valid && !elm.classList.contains("invalid")) {
       elm.classList.add("invalid");
 
       if (elm.validity.valueMissing) {
         const p = document.createElement("p");
         p.innerText = elm.dataset.valueMissingMsg!;
-        // need to check to make sure that the error message isn't already there
         elm.after(p);
       }
     }
   };
 
   const removeErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
-    if (elm.validity.valid) {
+    if (elm.validity.valid && elm.classList.contains("invalid")) {
       elm.classList.remove("invalid");
+      if (elm.nextSibling) {
+        elm.parentNode?.removeChild(elm.nextSibling);
+      }
     }
   };
 
