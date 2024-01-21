@@ -94,6 +94,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
+  // some page state
+  let hasTriedFormSubmission = false;
+
   const inputElms = document.querySelectorAll<
     HTMLInputElement | HTMLTextAreaElement
   >("input,textarea");
@@ -134,22 +137,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   // we tried to submit it once and it needs validation
   // 2. If it is dirty, then I want to do two things:
   // ... I think. Will need to think about this more
-  document
-    .querySelector<HTMLFormElement>("form")
-    ?.addEventListener("submit", (event) => {
-      if (
-        !event.currentTarget ||
-        !(event.currentTarget instanceof HTMLFormElement) ||
-        !event.currentTarget.checkValidity()
-      ) {
-        // show the errors if need be, then prevent the form from submitting
-        inputElms.forEach((node) => {
-          showErrorIfNeedBe(node);
-        });
-        event.preventDefault();
-        return;
-      }
-    });
+  const formElm = document.querySelector<HTMLFormElement>("form");
+  formElm?.addEventListener("submit", (event) => {
+    if (
+      !event.currentTarget ||
+      !(event.currentTarget instanceof HTMLFormElement) ||
+      !event.currentTarget.checkValidity()
+    ) {
+      // show the errors if need be, then prevent the form from submitting
+      inputElms.forEach((node) => {
+        showErrorIfNeedBe(node);
+      });
+      event.preventDefault();
+      hasTriedFormSubmission = true;
+      return;
+    }
+  });
 
   inputElms.forEach((node) => {
     node.addEventListener("input", (event) => {
@@ -157,7 +160,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         event.target instanceof HTMLInputElement ||
         event.target instanceof HTMLTextAreaElement
       ) {
-        removeErrorIfNeedBe(event.target);
+        if (hasTriedFormSubmission) {
+          removeErrorIfNeedBe(event.target);
+        }
       }
     });
   });
