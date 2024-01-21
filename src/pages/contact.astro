@@ -62,7 +62,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         name="name"
         placeholder="Name"
         required
-        data-value-missing-msg="Tell me your name!"
+        data-validation-msg="Tell me your name!"
       />
       <p></p>
     </div>
@@ -74,8 +74,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         name="email"
         placeholder="Email"
         required
-        data-value-missing-msg="HEY! What's your email??"
-        data-type-missing-msg="That doesn't look like an email to me."
+        data-validation-msg="HEY! What's your email?? Put in one that is ~~valid~~."
       />
       <p></p>
     </div>
@@ -86,7 +85,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         id="message"
         placeholder="Write me a message"
         required
-        data-value-missing-msg="You're not gonna write me anything?"></textarea>
+        data-validation-msg="You're not gonna write me anything?"></textarea>
       <p></p>
     </div>
     <button type="submit">Submit</button>
@@ -97,6 +96,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   // some page state
   let hasTriedFormSubmission = false;
 
+  // functions used for displaying and hiding the form errors
   const inputElms = document.querySelectorAll<
     HTMLInputElement | HTMLTextAreaElement
   >("input,textarea");
@@ -107,15 +107,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       const p = elm.nextSibling as HTMLParagraphElement;
       p.style.display = "block";
-
-      if (elm.validity.valueMissing) {
-        p.innerText = elm.dataset.valueMissingMsg ?? "";
-      }
-
-      if (elm.validity.typeMismatch) {
-        const p = document.createElement("p");
-        p.innerText = elm.dataset.typeMissingMsg ?? "";
-      }
+      p.innerText = elm.dataset.validationMsg ?? "";
     }
   };
 
@@ -130,30 +122,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   };
 
-  // oo this is going to be interesting
-  // I like this less noisy form, but now the strategy
-  // is going to have to change
-  // 1. will need to store that the form is dirty, meaning
-  // we tried to submit it once and it needs validation
-  // 2. If it is dirty, then I want to do two things:
-  // ... I think. Will need to think about this more
-  const formElm = document.querySelector<HTMLFormElement>("form");
-  formElm?.addEventListener("submit", (event) => {
-    if (
-      !event.currentTarget ||
-      !(event.currentTarget instanceof HTMLFormElement) ||
-      !event.currentTarget.checkValidity()
-    ) {
-      // show the errors if need be, then prevent the form from submitting
-      inputElms.forEach((node) => {
-        showErrorIfNeedBe(node);
-      });
-      event.preventDefault();
-      hasTriedFormSubmission = true;
-      return;
-    }
-  });
+  // set up the event listeners
+  document
+    .querySelector<HTMLFormElement>("form")
+    ?.addEventListener("submit", (event) => {
+      if (
+        !event.currentTarget ||
+        !(event.currentTarget instanceof HTMLFormElement) ||
+        !event.currentTarget.checkValidity()
+      ) {
+        // show the errors if need be, then prevent the form from submitting
+        inputElms.forEach((node) => {
+          showErrorIfNeedBe(node);
+        });
+        event.preventDefault();
+        hasTriedFormSubmission = true;
+        return;
+      }
+    });
 
+  // what would be the best UX here?
+  // I could just simplify the error message
+  // and say something like "email is required and enter a valid email address and call it good"
   inputElms.forEach((node) => {
     node.addEventListener("input", (event) => {
       if (
