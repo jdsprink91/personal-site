@@ -1,8 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// note the empty p tags below the inputs and textarea
+// I'm doing this so that the scoped styles can pick up
+// what needs to be styled. I'm just going to use
+// javascript to toggle the display
 ---
 
 <style>
+  form {
+    margin-top: 1.5rem;
+  }
+
   form > * + * {
     margin-top: 1rem;
   }
@@ -25,6 +34,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     max-width: 100%;
   }
 
+  input + p,
+  textarea + p {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--error-red);
+    display: none;
+  }
+
+  .field-star {
+    color: var(--error-red);
+  }
+
   @media screen and (max-width: 30rem) {
     button {
       width: 100%;
@@ -34,20 +55,125 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <BaseLayout pageTitle="Contact" headingCopy="Contact">
-  <form name="contact" method="post" data-netlify="true" action="/success">
+  <p class="asterisk-description">
+    The <span class="field-star" aria-hidden="true">*</span> denotes a required field.
+    All fields are required.
+  </p>
+  <form
+    name="contact"
+    method="post"
+    data-netlify="true"
+    action="/success"
+    novalidate="true"
+  >
     <div>
-      <label for="name">Your Name:</label>
-      <input id="name" type="text" name="name" placeholder="Name" />
+      <label for="name"
+        >Name: <span class="field-star" aria-hidden="true">*</span></label
+      >
+      <input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+        data-validation-msg="Tell me your name!"
+        aria-describedby="name-error-msg"
+      />
+      <p id="name-error-msg" aria-live="assertive"></p>
     </div>
     <div>
-      <label for="email">Your Email:</label>
-      <input id="email" type="email" name="email" placeholder="Email" />
+      <label for="email"
+        >Email: <span class="field-star" aria-hidden="true">*</span></label
+      >
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        data-validation-msg="HEY! What's your email?? Put in one that is ~~valid~~."
+        aria-describedby="email-error-msg"
+      />
+      <p id="email-error-msg" aria-live="assertive"></p>
     </div>
     <div>
-      <label for="message">Your Message:</label>
-      <textarea name="message" id="message" placeholder="Write me a message"
-      ></textarea>
+      <label for="message"
+        >Message: <span class="field-star" aria-hidden="true">*</span></label
+      >
+      <textarea
+        name="message"
+        id="message"
+        placeholder="Write me a message"
+        required
+        data-validation-msg="You're not gonna write me anything?"
+        aria-describedby="message-error-msg"></textarea>
+      <p id="message-error-msg" aria-live="assertive"></p>
     </div>
     <button type="submit">Submit</button>
   </form>
 </BaseLayout>
+
+<script>
+  // some page state
+  let hasTriedFormSubmission = false;
+
+  // functions used for displaying and hiding the form errors
+  const inputElms = document.querySelectorAll<
+    HTMLInputElement | HTMLTextAreaElement
+  >("input,textarea");
+
+  const showErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
+    if (!elm.validity.valid && !elm.classList.contains("invalid")) {
+      elm.classList.add("invalid");
+
+      const p = elm.nextSibling as HTMLParagraphElement;
+      p.style.display = "block";
+      p.innerText = elm.dataset.validationMsg ?? "";
+    }
+  };
+
+  const removeErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
+    if (elm.validity.valid && elm.classList.contains("invalid")) {
+      elm.classList.remove("invalid");
+      if (elm.nextSibling) {
+        const p = elm.nextSibling as HTMLParagraphElement;
+        p.style.display = "none";
+        p.innerText = "";
+      }
+    }
+  };
+
+  // set up the event listeners
+  document
+    .querySelector<HTMLFormElement>("form")
+    ?.addEventListener("submit", (event) => {
+      if (
+        !event.currentTarget ||
+        !(event.currentTarget instanceof HTMLFormElement) ||
+        !event.currentTarget.checkValidity()
+      ) {
+        // show the errors if need be, then prevent the form from submitting
+        inputElms.forEach((node) => {
+          showErrorIfNeedBe(node);
+        });
+        event.preventDefault();
+        hasTriedFormSubmission = true;
+        return;
+      }
+    });
+
+  // what would be the best UX here?
+  // I could just simplify the error message
+  // and say something like "email is required and enter a valid email address and call it good"
+  inputElms.forEach((node) => {
+    node.addEventListener("input", (event) => {
+      const isInputOrTextAreaElement =
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement;
+
+      if (isInputOrTextAreaElement && hasTriedFormSubmission) {
+        removeErrorIfNeedBe(event.target);
+      }
+    });
+  });
+</script>

@@ -4,10 +4,13 @@
 - [x] Get three pages: Home, Writing, Contact
 - [x] This will include looking for fonts, background colors, etc
 - [x] Make sure these pages look nice on mobile
-- [ ] Do some basic SEO
 - [x] Get domain name
 - [x] Get netlify account
 - [x] Deploy to web
-- [ ] Do basic form validation (with styling)
+- [x] Do basic form validation (with styling)
 - [x] Preload fonts
 
+# Personal Site V2 Launch
+- [ ] Do some basic SEO
+- [ ] Dark theme with toggle
+- [ ] Cool success animation when form has been submitted
