@@ -116,11 +116,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script>
   // some page state
   let hasTriedFormSubmission = false;
-
-  // functions used for displaying and hiding the form errors
   const inputElms = document.querySelectorAll<
     HTMLInputElement | HTMLTextAreaElement
   >("input,textarea");
+
+  // functions used for displaying and hiding the form errors
 
   const showErrorIfNeedBe = (elm: HTMLInputElement | HTMLTextAreaElement) => {
     if (!elm.validity.valid && !elm.classList.contains("invalid")) {
