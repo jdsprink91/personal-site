@@ -8,6 +8,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <style>
+  form {
+    margin-top: 1.5rem;
+  }
+
   form > * + * {
     margin-top: 1rem;
   }
@@ -34,8 +38,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   textarea + p {
     margin-top: 0.5rem;
     font-size: 0.75rem;
-    color: red;
+    color: var(--error-red);
     display: none;
+  }
+
+  .field-star {
+    color: var(--error-red);
   }
 
   @media screen and (max-width: 30rem) {
@@ -47,6 +55,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 
 <BaseLayout pageTitle="Contact" headingCopy="Contact">
+  <p class="asterisk-description">
+    The <span class="field-star" aria-hidden="true">*</span> denotes a required field.
+    All fields are required.
+  </p>
   <form
     name="contact"
     method="post"
@@ -55,7 +67,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     novalidate="true"
   >
     <div>
-      <label for="name">Your Name:</label>
+      <label for="name"
+        >Name: <span class="field-star" aria-hidden="true">*</span></label
+      >
       <input
         id="name"
         type="text"
@@ -63,11 +77,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         placeholder="Name"
         required
         data-validation-msg="Tell me your name!"
+        aria-describedby="name-error-msg"
+        aria-live="assertive"
       />
-      <p></p>
+      <p id="name-error-msg"></p>
     </div>
     <div>
-      <label for="email">Your Email:</label>
+      <label for="email"
+        >Email: <span class="field-star" aria-hidden="true">*</span></label
+      >
       <input
         id="email"
         type="email"
@@ -75,18 +93,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         placeholder="Email"
         required
         data-validation-msg="HEY! What's your email?? Put in one that is ~~valid~~."
+        aria-describedby="email-error-msg"
+        aria-live="assertive"
       />
-      <p></p>
+      <p id="email-error-msg"></p>
     </div>
     <div>
-      <label for="message">Your Message:</label>
+      <label for="message"
+        >Message: <span class="field-star" aria-hidden="true">*</span></label
+      >
       <textarea
         name="message"
         id="message"
         placeholder="Write me a message"
         required
-        data-validation-msg="You're not gonna write me anything?"></textarea>
-      <p></p>
+        data-validation-msg="You're not gonna write me anything?"
+        aria-describedby="message-error-msg"></textarea>
+      <p id="message-error-msg" aria-live="assertive"></p>
     </div>
     <button type="submit">Submit</button>
   </form>
@@ -146,13 +169,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   // and say something like "email is required and enter a valid email address and call it good"
   inputElms.forEach((node) => {
     node.addEventListener("input", (event) => {
-      if (
+      const isInputOrTextAreaElement =
         event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLTextAreaElement
-      ) {
-        if (hasTriedFormSubmission) {
-          removeErrorIfNeedBe(event.target);
-        }
+        event.target instanceof HTMLTextAreaElement;
+
+      if (isInputOrTextAreaElement && hasTriedFormSubmission) {
+        removeErrorIfNeedBe(event.target);
       }
     });
   });

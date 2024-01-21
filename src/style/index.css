@@ -25,6 +25,7 @@ p {
   --background-color: #ffecc8;
   --color: #2e2e2e;
   --link-color: #315f72;
+  --error-red: #8b0000;
 }
 
 body {
@@ -70,11 +71,11 @@ textarea:focus {
 }
 
 .invalid {
-  outline: 2px solid red;
+  outline: 2px solid var(--error-red);
 }
 
 .invalid:focus {
-  outline: 2px solid red;
+  outline: 2px solid var(--error-red);
 }
 
 button {
