@@ -78,9 +78,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         required
         data-validation-msg="Tell me your name!"
         aria-describedby="name-error-msg"
-        aria-live="assertive"
       />
-      <p id="name-error-msg"></p>
+      <p id="name-error-msg" aria-live="assertive"></p>
     </div>
     <div>
       <label for="email"
@@ -94,9 +93,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         required
         data-validation-msg="HEY! What's your email?? Put in one that is ~~valid~~."
         aria-describedby="email-error-msg"
-        aria-live="assertive"
       />
-      <p id="email-error-msg"></p>
+      <p id="email-error-msg" aria-live="assertive"></p>
     </div>
     <div>
       <label for="message"
