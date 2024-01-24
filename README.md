@@ -11,6 +11,6 @@
 - [x] Preload fonts
 
 # Personal Site V2 Launch
-- [ ] Do some basic SEO
+- [x] Do some basic SEO (honestly what I have right now is fine)
 - [ ] Dark theme with toggle
 - [ ] Cool success animation when form has been submitted

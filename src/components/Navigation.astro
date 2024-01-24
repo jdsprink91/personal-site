@@ -1,10 +1,17 @@
 ---
-
+// what do I want to do here?
+// 1. Use https://ryanmulligan.dev/ as inspo
+// 2. I think this means pull everything to the right above mobile, spread it on mobile
+// 3. Then I need to make the theme selector component
 ---
 
 <style>
   nav {
     border-bottom: 2px solid var(--color);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   ul {
@@ -14,7 +21,7 @@
     list-style-type: none;
     padding-left: 0;
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
   }
 
   li a {
@@ -32,4 +39,5 @@
     <li><a href="/writing">Writing</a></li>
     <li><a href="/contact">Contact</a></li>
   </ul>
+  <div>put a nice ol toggle button right here</div>
 </nav>
