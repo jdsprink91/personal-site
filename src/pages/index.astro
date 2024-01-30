@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 import good from "../images/good.jpeg";
@@ -29,7 +30,7 @@ import good from "../images/good.jpeg";
 </style>
 
 <BaseLayout pageTitle="Home" headingCopy="Hi! I'm Jason Sprinkle">
-  <img src={good.src} alt={"A handsom man standing next to a sunflower"} />
+  <Image src={good} alt={"A handsom man standing next to a sunflower"} />
   <p>I'm a software developer and writer based out of Austin, Texas.</p>
   <p>I read for <a href="https://abandonjournal.com/">Abandon Journal</a>.</p>
   <p>The D stands for Dale.</p>

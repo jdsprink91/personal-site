@@ -17,6 +17,7 @@
     "@astrojs/check": "^0.3.4",
     "astro": "^4.0.9",
     "modern-normalize": "^2.0.0",
+    "sharp": "^0.33.2",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
