@@ -41,9 +41,7 @@ const { pageTitle, headingCopy } = Astro.props;
     </header>
     <main>
       <h1>{headingCopy}</h1>
-      <div class="slot-wrapper">
-        <slot />
-      </div>
+      <slot />
     </main>
   </body>
 </html>
