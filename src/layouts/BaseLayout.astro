@@ -3,6 +3,7 @@
 import "modern-normalize/modern-normalize.css";
 import "../style/index.css";
 import Navigation from "../components/Navigation.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   pageTitle: string;
@@ -34,6 +35,7 @@ const { pageTitle, headingCopy } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Jason Sprinkle | {pageTitle}</title>
+    <ViewTransitions />
   </head>
   <body>
     <header>
