@@ -15,6 +15,7 @@ const { pageTitle, headingCopy } = Astro.props;
 
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/sunflower.svg" />
     <!-- preload the two fonts we will be using -->
@@ -35,7 +36,6 @@ const { pageTitle, headingCopy } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Jason Sprinkle | {pageTitle}</title>
-    <ViewTransitions />
   </head>
   <body>
     <header>
