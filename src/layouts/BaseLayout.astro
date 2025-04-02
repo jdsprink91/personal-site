@@ -134,7 +134,7 @@ const { pageTitle, headingCopy } = Astro.props;
     <header transition:persist>
       <Navigation />
     </header>
-    <main transition:animate="fade">
+    <main transition:animate="initial">
       <h1>{headingCopy}</h1>
       <slot />
     </main>
