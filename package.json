@@ -11,11 +11,11 @@
     "lint": "eslint --ext .js,.astro ./src",
     "prettier:check": "prettier ./src",
     "prettier:write": "prettier --write ./src",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "0.4.1",
-    "astro": "4.2.6",
+    "astro": "^5.5.6",
     "modern-normalize": "^2.0.0",
     "typescript": "^5.3.3"
   },
@@ -26,18 +26,9 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "husky": "^8.0.0",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.3"
-  },
-  "lint-staged": {
-    "**/*.{astro,js}": [
-      "yarn run lint",
-      "yarn run prettier:write"
-    ],
-    "**/*.{css}": [
-      "yarn run prettier:write"
-    ]
   }
 }

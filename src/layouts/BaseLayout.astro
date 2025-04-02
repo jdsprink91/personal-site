@@ -2,7 +2,7 @@
 // make sure we're working with a base that makes sense
 import "modern-normalize/modern-normalize.css";
 import Navigation from "../components/Navigation.astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   pageTitle: string;
@@ -14,7 +14,7 @@ const { pageTitle, headingCopy } = Astro.props;
 
 <html lang="en">
   <head>
-    <ViewTransitions />
+    <ClientRouter />
     <meta charset="utf-8" />
     <link
       rel="icon"
@@ -55,6 +55,7 @@ const { pageTitle, headingCopy } = Astro.props;
         margin-left: auto;
         padding-left: 1rem;
         padding-right: 1rem;
+        padding-bottom: 3rem;
         font-family: Work Sans;
       }
 
