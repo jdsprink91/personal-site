@@ -1,8 +1,9 @@
 export default {
   plugins: ["prettier-plugin-astro"],
+  bracketSameLine: true,
   overrides: [
     {
-      files: "*.astro",
+      files: ["*.astro"],
       options: {
         parser: "astro",
       },
